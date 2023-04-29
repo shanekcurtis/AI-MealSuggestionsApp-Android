@@ -5,6 +5,26 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/navigation_home">
 
-    <!-- TODO: add fragments -->
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.mymealsuggestionapp.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
 
+    <fragment
+        android:id="@+id/navigation_Meal"
+        android:name="com.example.mymealsuggestionapp.ui.mealsuggestions.MealSuggestionsFragment"
+        android:label="Meals"
+        tools:layout="@layout/fragment_mealsuggestions" />
+
+    <fragment
+        android:id="@+id/navigation_save_Meal"
+        android:name="com.example.mymealsuggestionapp.ui.savedmeals.SavedMealFragment"
+        android:label="Saved Meals"
+        tools:layout="@layout/fragment_savedmeals" />
+    <fragment
+        android:id="@+id/navigation_setting"
+        android:name="com.example.mymealsuggestionapp.ui.settings.SettingsFragment"
+        android:label="Settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>
