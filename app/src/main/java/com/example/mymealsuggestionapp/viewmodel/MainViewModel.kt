@@ -5,11 +5,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
-import com.example.mymealsuggestionapp.data.data_source.MealDatabase
-import com.example.mymealsuggestionapp.data.repository.MealRepositoryImpl
+import com.example.mymealsuggestionapp.database.MealDatabase
+import com.example.mymealsuggestionapp.database.MealRepositoryImpl
 import com.example.mymealsuggestionapp.model.Ingredient
 import com.example.mymealsuggestionapp.model.MealSuggestion
-import com.example.mymealsuggestionapp.repository.MealsRepository
+import com.example.mymealsuggestionapp.database.MealsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
