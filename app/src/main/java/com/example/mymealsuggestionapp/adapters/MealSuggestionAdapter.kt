@@ -17,7 +17,7 @@ class MealSuggestionAdapter : RecyclerView.Adapter<MealSuggestionViewHolder>() {
     private var mealSuggestions: List<MealSuggestion>
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MealSuggestionViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.meal_suggestion_item, parent, false)
+            .inflate(R.layout.item_meal_suggestions, parent, false)
         return MealSuggestionViewHolder(view)
     }
 

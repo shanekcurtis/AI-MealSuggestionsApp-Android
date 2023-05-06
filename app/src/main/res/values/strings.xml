@@ -1,6 +1,13 @@
 <resources>
-    <string name="app_name">MyMealSuggestions</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="app_name">AI Meal Suggest</string>
+    <string name="settings">Settings</string>
+    <string name="meal">Meal</string>
+    <string name="home">Home</string>
+    <string name="enter_ingredient">Enter ingredient</string>
+    <string name="add_ingredient">Add Ingredient</string>
+    <string name="meal_suggestions">Meal Suggestions</string>
+    <string name="ingredients">Ingredients:</string>
+    <string name="saved_meals">Saved Meals</string>
+    <string name="instructions">Instructions:</string>
+    <string name="nationality_of_influence">Nationality of Influence:</string>
 </resources>

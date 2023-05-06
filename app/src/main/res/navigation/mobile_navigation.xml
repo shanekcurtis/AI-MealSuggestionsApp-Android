@@ -21,7 +21,7 @@
         android:id="@+id/navigation_save_Meal"
         android:name="com.example.mymealsuggestionapp.ui.savedmeals.SavedMealFragment"
         android:label="Saved Meals"
-        tools:layout="@layout/fragment_savedmeals" />
+        tools:layout="@layout/fragment_saved_meals" />
     <fragment
         android:id="@+id/navigation_setting"
         android:name="com.example.mymealsuggestionapp.ui.settings.SettingsFragment"
