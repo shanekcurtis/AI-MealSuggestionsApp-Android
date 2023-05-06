@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <item
-        android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_home_black_24dp"
-        android:title="Home" />
-
+        android:id="@+id/home"
+        android:icon="@drawable/ic_home"
+        android:title="@string/home" />
     <item
-        android:id="@+id/navigation_Meal"
-        android:icon="@drawable/meal"
-        android:title="Meal Suggestions" />
-
+        android:id="@+id/mealSuggestions"
+        android:icon="@drawable/ic_meal"
+        android:title="@string/meal_suggestions" />
     <item
-        android:id="@+id/navigation_save_Meal"
-        android:icon="@drawable/save"
-        android:title="Saved Meals" />
+        android:id="@+id/savedMeals"
+        android:icon="@drawable/ic_save"
+        android:title="@string/saved_meals" />
     <item
-        android:id="@+id/navigation_setting"
-        android:icon="@drawable/setting"
-        android:title="Settings" />
-
+        android:id="@+id/settings"
+        android:icon="@drawable/ic_setting"
+        android:title="@string/settings" />
 </menu>

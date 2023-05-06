@@ -1,7 +1,11 @@
 package com.example.mymealsuggestionapp.model
 
-class MealSuggestion     // Initialize as not favorite by default
-    (var mealName: String, var ingredients: List<String>) {
-    var isFavorite = false
+data class MealSuggestion(
+    val name: String,
+    val ingredients: Array<String>,
+    val preparationInstructions: Array<String>,
 
+) {
+
+    val isFavorite = false
 }
