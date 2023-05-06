@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/nav_graph"
+app:startDestination="@id/home">
+
+<fragment
+    android:id="@+id/home"
+    android:name="com.example.mymealsuggestionapp.ui.home.HomeFragment"
+    android:label="HomeFragment"
+    tools:layout="@layout/fragment_home" />
+<fragment
+    android:id="@+id/mealSuggestions"
+    android:name="com.example.mymealsuggestionapp.ui.mealsuggestions.MealSuggestionsFragment"
+    android:label="MealSuggestionsFragment" />
+<fragment
+    android:id="@+id/savedMeals"
+    android:name="com.example.mymealsuggestionapp.ui.savedmeals.SavedMealFragment"
+    android:label="SavedMealsFragment" />
+<fragment
+    android:id="@+id/settings"
+    android:name="com.example.mymealsuggestionapp.ui.settings.SettingsFragment"
+    android:label="SettingsFragment" />
+</navigation>

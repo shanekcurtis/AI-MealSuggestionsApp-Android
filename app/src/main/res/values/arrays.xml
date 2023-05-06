@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="nationalities" >
+        <item >None</item>
+        <item >American</item>
+        <item >Asian</item>
+        <item >European</item>
+        <item >African</item>
+        <item >Hispanic</item>
+    </string-array>
+</resources>
