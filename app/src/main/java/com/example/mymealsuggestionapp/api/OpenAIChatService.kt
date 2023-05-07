@@ -10,17 +10,24 @@ import com.aallam.openai.api.model.ModelId
 import com.aallam.openai.client.OpenAI
 import com.aallam.openai.client.OpenAIConfig
 import com.example.mymealsuggestionapp.model.MealSuggestion
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.runBlocking
 import kotlin.time.ExperimentalTime
 import kotlin.time.seconds
+import java.lang.System
 
 @OptIn(BetaOpenAI::class, ExperimentalTime::class)
-fun openAIChatService(): Unit = runBlocking {
+suspend fun openAIChatService(mealSuggestionFlow: MutableStateFlow<List<MealSuggestion>>): Unit = runBlocking {
+
+    // Obtain OpenAI Key from environment variable
+    //val apiKey = System.getenv("OPENAI_API_KEY")
 
     val generatedMealSuggestionList: List<MealSuggestion>
 
     val config = OpenAIConfig(
-        token = "OPEN_AI_KEY",
+        //TODO: FIX
+        //token = apiKey, (NOT WORKING)
+        token = "OPENAI_API_KEY",
         timeout = Timeout(socket = 60.seconds),
         // additional configurations...
     )
@@ -39,7 +46,8 @@ fun openAIChatService(): Unit = runBlocking {
                 role = ChatRole.User,
                 content = "Here is the list of ingredients: Flour, Eggs, Milk, Salt"
             )
-        )
+        ),
+        temperature = 0.0
     )
 
     @OptIn(BetaOpenAI::class)
@@ -50,6 +58,9 @@ fun openAIChatService(): Unit = runBlocking {
     println("Generated Meal Suggestions.")
     generatedMealSuggestionList = parseMealSuggestions(content)
 
+    mealSuggestionFlow.value = generatedMealSuggestionList
+
+    // Print output list of MealSuggestion objects for testing
     for (mealSuggestion in generatedMealSuggestionList) {
         println(mealSuggestion.toString())
     }
@@ -83,11 +94,27 @@ fun parseMealSuggestions(content: String): List<MealSuggestion> {
         when {
             line.startsWith("Meal Name: ") -> {
                 if (mealName.isNotEmpty()) {
+
+                    // Initialize empty arrays to determine size for array
                     val ingredientsArray = arrayOfNulls<String>(ingredients.size)
                     val preparationArray = arrayOfNulls<String>(preparation.size)
-                    mealSuggestions.add(MealSuggestion(mealName, ingredients.toArray(ingredientsArray), preparation.toArray(preparationArray)))
+
+                    // Prepare the MealSuggestion object to add to list
+                    val mealToAdd = MealSuggestion(
+                        id = 0,
+                        name = mealName,
+                        ingredients = ingredients.toArray(ingredientsArray),
+                        preparationInstructions = preparation.toArray(preparationArray),
+                        isFavourite = false
+                    )
+
+                    // Add the MealSuggestion object to the list of Meal Suggestions
+                    mealSuggestions.add(mealToAdd)
+
+                    // Clear out the current ingredients and preparation ArrayLists
                     ingredients.clear()
                     preparation.clear()
+
                 }
                 mealName = line.substring("Meal Name: ".length)
             }
@@ -111,9 +138,22 @@ fun parseMealSuggestions(content: String): List<MealSuggestion> {
     }
     // Add the last MealSuggestion
     if (mealName.isNotEmpty()) {
+
+        // Initialize empty arrays to determine size of arrays
         val ingredientsArray = arrayOfNulls<String>(ingredients.size)
         val preparationArray = arrayOfNulls<String>(preparation.size)
-        mealSuggestions.add(MealSuggestion(mealName, ingredients.toArray(ingredientsArray), preparation.toArray(preparationArray)))
+
+        // Prepare the MealSuggestion object to add to list
+        val mealToAdd = MealSuggestion(
+            id = 0,
+            name = mealName,
+            ingredients = ingredients.toArray(ingredientsArray),
+            preparationInstructions = preparation.toArray(preparationArray),
+            isFavourite = false
+        )
+
+        // Add the MealSuggestion object to the list of Meal Suggestions
+        mealSuggestions.add(mealToAdd)
     }
 
     return mealSuggestions

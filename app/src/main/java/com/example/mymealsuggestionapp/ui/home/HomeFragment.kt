@@ -58,6 +58,7 @@ class HomeFragment : Fragment() {
         }
 
         binding.generateMeals.setOnClickListener {
+            mainViewModel.getMealSuggestions()
             (activity as? MainActivity)?.navigateToNavBarDestination(R.id.mealSuggestions)
         }
 

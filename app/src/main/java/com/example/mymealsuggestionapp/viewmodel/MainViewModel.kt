@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
+import com.example.mymealsuggestionapp.api.openAIChatService
 import com.example.mymealsuggestionapp.database.MealDatabase
 import com.example.mymealsuggestionapp.database.MealRepositoryImpl
 import com.example.mymealsuggestionapp.model.Ingredient
@@ -47,10 +48,8 @@ class MainViewModel(private val repository: MealsRepository) : ViewModel() {
     }
 
     fun getMealSuggestions() {
-        //dummy data
-
-        val mealSuggestions: MutableList<MealSuggestion> = ArrayList()
-
+        // Old Dummy Data generation
+        /*val mealSuggestions: MutableList<MealSuggestion> = ArrayList()
         for (i in 1..10) {
             mealSuggestions.add(
                 MealSuggestion(
@@ -65,9 +64,12 @@ class MainViewModel(private val repository: MealsRepository) : ViewModel() {
                     isFavourite = false
                 )
             )
-        }
+        }*/
 
-        _currentMealSuggestions.value = mealSuggestions
+        // Run OpenAI Chat Service, and get the generated list of MealSuggestion objects
+        viewModelScope.launch(Dispatchers.IO) {
+            openAIChatService(_currentMealSuggestions)
+        }
     }
 
     fun addToSavedMeals(mealSuggestion: MealSuggestion) =

@@ -65,6 +65,6 @@ class MealSuggestionsFragment : Fragment() {
             }
         }
 
-        mainViewModel.getMealSuggestions()
+
     }
 }

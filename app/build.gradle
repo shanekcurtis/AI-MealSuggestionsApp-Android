@@ -38,6 +38,7 @@ android {
 
 dependencies {
 
+    //Misc. Dependencies
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
@@ -45,7 +46,17 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    //Needed this to fix duplicate class build-time error
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
+
+    //OpenAI API BOM
+    // import Kotlin API client BOM
+    implementation platform('com.aallam.openai:openai-client-bom:3.2.3')
+
+    // define dependencies without versions
+    implementation 'com.aallam.openai:openai-client'
+    runtimeOnly 'io.ktor:ktor-client-okhttp'
 
     // navigation
     implementation "androidx.navigation:navigation-fragment-ktx:2.5.3"
