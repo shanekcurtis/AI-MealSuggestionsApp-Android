@@ -1,5 +1,7 @@
 package com.example.mymealsuggestionapp.api
 
+import android.content.Context
+import androidx.appcompat.app.AppCompatActivity
 import com.aallam.openai.api.BetaOpenAI
 import com.aallam.openai.api.chat.ChatCompletion
 import com.aallam.openai.api.chat.ChatCompletionRequest
@@ -16,9 +18,10 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.seconds
 import java.lang.System
 import java.util.regex.Pattern
+import com.example.mymealsuggestionapp.utils.AppPreferences
 
 @OptIn(BetaOpenAI::class, ExperimentalTime::class)
-suspend fun openAIChatService(mealSuggestionFlow: MutableStateFlow<List<MealSuggestion>>): Unit = runBlocking {
+suspend fun openAIChatService(influence: String, ingredients: String, mealSuggestionFlow: MutableStateFlow<List<MealSuggestion>>): Unit = runBlocking {
 
     // Obtain OpenAI Key from environment variable
     //val apiKey = System.getenv("OPENAI_API_KEY")
@@ -29,11 +32,16 @@ suspend fun openAIChatService(mealSuggestionFlow: MutableStateFlow<List<MealSugg
         //TODO: FIX
         //token = apiKey, (NOT WORKING)
         token = "OPENAI_API_KEY",
-        timeout = Timeout(socket = 60.seconds),
+        timeout = Timeout(socket = 120.seconds),
         // additional configurations...
     )
 
     val openAI = OpenAI(config)
+
+    var prompt = "You are now a professional chef, generate a list of meal suggestions based on the given list of ingredients. When listing out the possible meals, format your response like the following (DO NOT print \n in your response): “Meal Name: {meal name} \n Ingredients used: \n {measurement and name of ingredient 1} \n {measurement and name of ingredient 2} \n {measurement and name of ingredient 3}, etc (showing each individual ingredient on a new line under the label ‘Ingredients used:’’), Preparation Instructions: \n {step 1} \n {step 2} \n {step 3}, etc (showing each individual step on a new line under the label ‘Preparation Instructions:’"
+    if (influence != "None") {
+        prompt = "You are now a professional chef, generate a list of meal suggestions with $influence influence based on the given list of ingredients. When listing out the possible meals, format your response like the following (DO NOT print \n in your response): “Meal Name: {meal name} \n Ingredients used: \n {measurement and name of ingredient 1} \n {measurement and name of ingredient 2} \n {measurement and name of ingredient 3}, etc (showing each individual ingredient on a new line under the label ‘Ingredients used:’’), Preparation Instructions: \n {step 1} \n {step 2} \n {step 3}, etc (showing each individual step on a new line under the label ‘Preparation Instructions:’"
+    }
 
     @OptIn(BetaOpenAI::class)
     var chatCompletionRequest = ChatCompletionRequest(
@@ -41,11 +49,11 @@ suspend fun openAIChatService(mealSuggestionFlow: MutableStateFlow<List<MealSugg
         messages = listOf(
             ChatMessage(
                 role = ChatRole.System,
-                content = "You are now a professional chef, generate a list of meal suggestions based on the given list of ingredients. When listing out the possible meals, format your response like the following (DO NOT print \\n in your response): “Meal Name: {meal name} \\n Ingredients used: \\n {measurement and name of ingredient 1} \\n {measurement and name of ingredient 2} \\n {measurement and name of ingredient 3}, etc (showing each individual ingredient on a new line under the label ‘Ingredients used:’’), Preparation Instructions: \\n {step 1} \\n {step 2} \\n {step 3}, etc (showing each individual step on a new line under the label ‘Preparation Instructions:’"
+                content = prompt
             ),
             ChatMessage(
                 role = ChatRole.User,
-                content = "Here is the list of ingredients: Flour, Eggs, Milk, Salt"
+                content = "Here is the list of ingredients: $ingredients"
             )
         ),
         temperature = 0.0

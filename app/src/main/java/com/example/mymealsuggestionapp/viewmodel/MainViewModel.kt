@@ -11,6 +11,7 @@ import com.example.mymealsuggestionapp.database.MealRepositoryImpl
 import com.example.mymealsuggestionapp.model.Ingredient
 import com.example.mymealsuggestionapp.model.MealSuggestion
 import com.example.mymealsuggestionapp.database.MealsRepository
+import com.example.mymealsuggestionapp.utils.AppPreferences
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -41,34 +42,25 @@ class MainViewModel(private val repository: MealsRepository) : ViewModel() {
         _currentIngredients.value = list
     }
 
+    fun clearCurrentMealSuggestions() {
+        _currentMealSuggestions.value = emptyList()
+    }
+
+    fun getIngredients(): String {
+        val ingredientsList = _currentIngredients.value.map { it.nameOfIngredient }
+        return ingredientsList.joinToString(separator = ", ")
+    }
+
     fun getSavedMealSuggestions() = viewModelScope.launch(Dispatchers.IO) {
         repository.getSavedMealSuggestions().collectLatest {
             _savedMealSuggestions.value = it
         }
     }
 
-    fun getMealSuggestions() {
-        // Old Dummy Data generation
-        /*val mealSuggestions: MutableList<MealSuggestion> = ArrayList()
-        for (i in 1..10) {
-            mealSuggestions.add(
-                MealSuggestion(
-                    id = i,
-                    name = "Meal $i",
-                    ingredients = arrayOf("ingredient 1", "ingredient 2", "ingredient 3"),
-                    preparationInstructions = arrayOf(
-                        "preparationInstruction 1",
-                        "preparationInstruction 2",
-                        "preparationInstruction 3"
-                    ),
-                    isFavourite = false
-                )
-            )
-        }*/
-
+    fun getMealSuggestions(influence: String) {
         // Run OpenAI Chat Service, and get the generated list of MealSuggestion objects
         viewModelScope.launch(Dispatchers.IO) {
-            openAIChatService(_currentMealSuggestions)
+            openAIChatService(influence, getIngredients(), _currentMealSuggestions)
         }
     }
 
