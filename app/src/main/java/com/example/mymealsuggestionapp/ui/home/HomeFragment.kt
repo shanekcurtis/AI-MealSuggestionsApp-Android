@@ -49,6 +49,7 @@ class HomeFragment : Fragment() {
             val nameOfIngredient = binding.etIngredient.text.toString()
             if (nameOfIngredient.isNotBlank()) {
                 mainViewModel.addIngredient(Ingredient(nameOfIngredient = nameOfIngredient))
+                binding.etIngredient.text.clear()
             } else Toast.makeText(
                 requireContext(),
                 "Please enter an ingredient.",
