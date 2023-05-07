@@ -15,6 +15,7 @@ import kotlinx.coroutines.runBlocking
 import kotlin.time.ExperimentalTime
 import kotlin.time.seconds
 import java.lang.System
+import java.util.regex.Pattern
 
 @OptIn(BetaOpenAI::class, ExperimentalTime::class)
 suspend fun openAIChatService(mealSuggestionFlow: MutableStateFlow<List<MealSuggestion>>): Unit = runBlocking {
@@ -80,6 +81,10 @@ fun extractContent(completion: ChatCompletion): String {
 
     // Extract the desired content from the API response using the start and end indices
     val extractedContent = completion.toString().substring(startIndex, endIndex).trim()
+
+    println("START OF EXTRACTED CONTENT")
+    println(extractedContent)
+    println("END OF EXTRACTED CONTENT")
 
     return extractedContent
 }
@@ -158,3 +163,9 @@ fun parseMealSuggestions(content: String): List<MealSuggestion> {
 
     return mealSuggestions
 }
+
+
+
+
+
+
