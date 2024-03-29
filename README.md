@@ -7,8 +7,6 @@ This project uses OpenAI's 3.5 turbo Chat API to take an input list of ingredien
 
 The Meal Suggestions App is built with an MVVM structure, and uses a Room database to store/read/delete saved meals that the AI suggests.
 
-
-
 ## Technologies Used
 - Kotlin v1.7.21
 - OpenAI's Chat 3.5 Turbo API
@@ -16,9 +14,15 @@ The Meal Suggestions App is built with an MVVM structure, and uses a Room databa
 - Android Studio
 - Android SDK 33
 - Git
+- 
 ## Acknowledgements
 
  - [OpenAI API Client for Kotlin](https://awesomeopensource.com/project/elangosundar/awesome-README-templates) - This Kotlin client for the OpenAI API made it significantly easier to implement the call/response of the API.
+
+## Demo
+
+https://github.com/shanekcurtis/AI-MealSuggestionsApp-Android/assets/123837613/8c5c4261-fbc7-4926-af79-ac6f7c55c658
+
 
 
 
