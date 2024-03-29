@@ -1,9 +1,9 @@
 
 # Meal Suggestions App
 
-This app, which was developed as a group project for our CS414 Mobile App Development final, is an AI-Powered Meal Suggestions app built for Android. 
+This app, which was developed as a group project for our CS414 Mobile App Development final, is an AI-Powered Meal Suggestions app built for Android. This project was marked as the most innovative in the class.
 
-This project uses OpenAI's 3.5 turbo Chat API to take an input list of ingredients from the user, an optional "nationality of influence" and outputs multiple meal suggestions for the user to prepare.
+This project leverages OpenAI's 3.5 turbo Chat API to take an input list of ingredients from the user, an optional "nationality of influence" and outputs multiple meal suggestions for the user to prepare. The purpose of this app is to encourage less food waste, and by design it will generate meal suggestions focused around ingredients that you already have on hand.
 
 The Meal Suggestions App is built with an MVVM structure, and uses a Room database to store/read/delete saved meals that the AI suggests.
 
