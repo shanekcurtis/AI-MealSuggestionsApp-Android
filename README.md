@@ -14,7 +14,7 @@ The Meal Suggestions App is built with an MVVM structure, and uses a Room databa
 - Android Studio
 - Android SDK 33
 - Git
-- 
+  
 ## Acknowledgements
 
  - [OpenAI API Client for Kotlin](https://awesomeopensource.com/project/elangosundar/awesome-README-templates) - This Kotlin client for the OpenAI API made it significantly easier to implement the call/response of the API.
